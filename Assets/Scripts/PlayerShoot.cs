@@ -9,6 +9,10 @@ public class PlayerShoot : NetworkBehaviour
     [SerializeField]
     private Camera cam;
 
+    [SerializeField]
+
+    private LayerMask mask;
+
     void Start()
     {
         if (cam == null)
@@ -29,9 +33,9 @@ public class PlayerShoot : NetworkBehaviour
     private void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask ))
         {
-            Debug.Log("We hit " + hit.collider.name);
+            Debug.Log("We hit : " + hit.collider.name);
         }
     }
 
