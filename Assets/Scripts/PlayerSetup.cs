@@ -19,11 +19,19 @@ public class PlayerSetup : NetworkBehaviour
        }
        else
        {
-        sceneCamera = Camera.main;
-        if (sceneCamera != null)
-        {
-            sceneCamera.gameObject.SetActive(false);
-        }
+            sceneCamera = Camera.main;
+            if (sceneCamera != null)
+            {
+                sceneCamera.gameObject.SetActive(false);
+            }
+       }
+   }
+
+   private void OnDisable()
+   {
+       if (sceneCamera != null)
+       {
+           sceneCamera.gameObject.SetActive(true);
        }
    }
 }
