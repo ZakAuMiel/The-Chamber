@@ -23,6 +23,7 @@ public class PlayerSetup : NetworkBehaviour
                 sceneCamera.gameObject.SetActive(false);
             }
        }
+       RegisterPlayer();
    }
 
    private void DisableComponents()
@@ -44,5 +45,11 @@ public class PlayerSetup : NetworkBehaviour
        {
            sceneCamera.gameObject.SetActive(true);
        }
+   }
+
+   private void RegisterPlayer()
+   {
+        string playerName = "Player " + GetComponent<NetworkIdentity>().netId;
+        transform.name = playerName;
    }
 }
