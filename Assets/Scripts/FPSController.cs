@@ -80,8 +80,6 @@ public class FPSController : NetworkBehaviour
                 transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
             }
             #endregion
-        }else {
-            return;
-        }
+        }else { return; }
     }
 }
