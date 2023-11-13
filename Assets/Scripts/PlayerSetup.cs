@@ -4,6 +4,7 @@ using Mirror;
 public class PlayerSetup : NetworkBehaviour
 {
    [SerializeField] private Behaviour[] componentsToDisable;
+   [SerializeField] private string remoteLayerName = "RemotePlayer";
 
    Camera sceneCamera;
 
@@ -11,11 +12,8 @@ public class PlayerSetup : NetworkBehaviour
    {
        if (!isLocalPlayer)
        {
-           //On boucler les différents components pour les désactiver si ce n'est pas le joueur local
-           for (int i = 0; i < componentsToDisable.Length; i++)
-           {
-               componentsToDisable[i].enabled = false;
-           }
+            DisableComponents();
+            AssignRemoteLayer();
        }
        else
        {
@@ -25,6 +23,19 @@ public class PlayerSetup : NetworkBehaviour
                 sceneCamera.gameObject.SetActive(false);
             }
        }
+   }
+
+   private void DisableComponents()
+   {
+       for (int i = 0; i < componentsToDisable.Length; i++)
+       {
+           componentsToDisable[i].enabled = false;
+       }
+   }
+
+   private void AssignRemoteLayer()
+   {
+       gameObject.layer = LayerMask.NameToLayer("RemotePlayer");
    }
 
    private void OnDisable()
