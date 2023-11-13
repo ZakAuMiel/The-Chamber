@@ -133,9 +133,11 @@ GameObject:
   - component: {fileID: 7852034861093912191}
   - component: {fileID: 7852034861093912177}
   - component: {fileID: 7852034861093912190}
+  - component: {fileID: -5311140057640450589}
+  - component: {fileID: 4969242312561941110}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,6 +315,33 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &-5311140057640450589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852034861093912185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f040945fa2027439e58fa390474332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  componentsToDisable:
+  - {fileID: 7852034861093912191}
+  - {fileID: 4969242312561941110}
+  - {fileID: 7852034860373202058}
+--- !u!81 &4969242312561941110
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852034861093912185}
+  m_Enabled: 1
 --- !u!1 &7852034861368732389
 GameObject:
   m_ObjectHideFlags: 0
