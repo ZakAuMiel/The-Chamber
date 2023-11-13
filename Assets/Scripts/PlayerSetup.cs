@@ -15,5 +15,9 @@ public class PlayerSetup : NetworkBehaviour
                componentsToDisable[i].enabled = false;
            }
        }
+       else
+       {
+         Camera.main.gameObject.SetActive(false);
+       }
    }
 }
