@@ -3,8 +3,11 @@ using Mirror;
 
 public class PlayerSetup : NetworkBehaviour
 {
+   #pragma warning disable 04114
    [SerializeField] private Behaviour[] componentsToDisable;
+   #pragma warning disable 0414
    [SerializeField] private string remoteLayerName = "RemotePlayer";
+   #pragma warning restore 0414
 
    Camera sceneCamera;
 
@@ -23,6 +26,7 @@ public class PlayerSetup : NetworkBehaviour
                 sceneCamera.gameObject.SetActive(false);
             }
        }
+
        RegisterPlayer();
    }
 
