@@ -19,25 +19,8 @@ public class GameManager : MonoBehaviour
         players.Remove(playerId);
     }
 
-    private void OnGUI()
+    public static Player GetPlayer(string playerId)
     {
-        GUILayout.BeginArea(new Rect(200, 200, 200, 500));
-        GUILayout.BeginVertical();
-
-        //frame per seconds
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("FPS: " + (int)(1.0f / Time.smoothDeltaTime));
-        GUILayout.EndHorizontal();
-
-        foreach (string playerId in players.Keys)
-        {
-            GUILayout.Label(playerId + " - " + players[playerId].transform.name);
-        }
-
-        
-
-
-        GUILayout.EndVertical();
-        GUILayout.EndArea();
+        return players[playerId];
     }
 }
