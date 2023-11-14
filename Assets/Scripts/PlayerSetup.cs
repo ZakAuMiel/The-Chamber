@@ -3,7 +3,7 @@ using Mirror;
 
 public class PlayerSetup : NetworkBehaviour
 {
-   #pragma warning disable 04114
+   
    [SerializeField] private Behaviour[] componentsToDisable;
    #pragma warning disable 0414
    [SerializeField] private string remoteLayerName = "RemotePlayer";
@@ -27,7 +27,16 @@ public class PlayerSetup : NetworkBehaviour
             }
        }
 
-       RegisterPlayer();
+   }
+
+   public override void OnStartClient()
+   {
+        base.OnStartClient();
+
+        string netID = GetComponent<NetworkIdentity>().netId.ToString();
+        Player player = GetComponent<Player>();
+
+        GameManager.RegisterPlayer( netID, player );
    }
 
    private void DisableComponents()
@@ -49,11 +58,8 @@ public class PlayerSetup : NetworkBehaviour
        {
            sceneCamera.gameObject.SetActive(true);
        }
+
+        GameManager.UnRegisterPlayer(transform.name);
    }
 
-   private void RegisterPlayer()
-   {
-        string playerName = "Player " + GetComponent<NetworkIdentity>().netId;
-        transform.name = playerName;
-   }
 }
