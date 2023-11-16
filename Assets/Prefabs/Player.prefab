@@ -283,8 +283,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  smooth: 12
-  multiplier: 6
+  smooth: 15
+  multiplier: 8
 --- !u!114 &8780366256056581653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,10 +550,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   playerCamera: {fileID: 7852034860373202058}
-  walkSpeed: 6
-  runSpeed: 12
-  jumpPower: 7
-  gravity: 10
+  walkSpeed: 12
+  runSpeed: 24
+  jumpPower: 10
+  gravity: 15
   lookSpeed: 2
   lookXLimit: 45
   canMove: 1
@@ -628,6 +628,7 @@ MonoBehaviour:
   - {fileID: 4969242312561941110}
   - {fileID: 7852034860373202058}
   - {fileID: 6669779291759845250}
+  - {fileID: 4969242312561941110}
   remoteLayerName: RemotePlayer
 --- !u!81 &4969242312561941110
 AudioListener:
@@ -670,7 +671,7 @@ MonoBehaviour:
   syncInterval: 0
   weapon:
     name: Glock
-    damage: 10
+    damage: 100
     range: 100
   cam: {fileID: 7852034860373202058}
   mask:
@@ -688,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c786adfa443d6408324df901eed709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   maxHealth: 100

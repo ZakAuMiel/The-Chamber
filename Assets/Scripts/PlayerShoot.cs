@@ -3,28 +3,26 @@ using Mirror;
 
 public class PlayerShoot : NetworkBehaviour
 {
-
     public PlayerWeapon weapon;
 
     [SerializeField]
     private Camera cam;
 
     [SerializeField]
-
     private LayerMask mask;
 
     void Start()
     {
-        if (cam == null)
+        if(cam == null)
         {
-            Debug.LogError("PlayerShoot: No camera referenced!");
+            Debug.LogError("Pas de caméra renseignée sur le système de tir.");
             this.enabled = false;
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
@@ -34,9 +32,10 @@ public class PlayerShoot : NetworkBehaviour
     private void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask ))
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
         {
-            if (hit.collider.tag == "Player")
+            if(hit.collider.tag == "Player")
             {
                 CmdPlayerShot(hit.collider.name, weapon.damage);
             }
@@ -44,11 +43,12 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     [Command]
-    void CmdPlayerShot(string playerId, float damage)
+    private void CmdPlayerShot(string playerId, float damage)
     {
-        Debug.Log( playerId + " has been shot.");
-        Player player = GameManager.GetPlayer( playerId );
-        player.RpcTakeDamage(weapon.damage);
+        Debug.Log(playerId + " a été touché.");
+
+        Player player = GameManager.GetPlayer(playerId);
+        player.RpcTakeDamage(damage);
     }
 
 }
