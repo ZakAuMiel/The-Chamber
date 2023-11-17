@@ -69,6 +69,7 @@ namespace Mirror
                 if (GUILayout.Button("Client"))
                 {
                     manager.StartClient();
+
                 }
                 // This updates networkAddress every frame from the TextField
                 manager.networkAddress = GUILayout.TextField(manager.networkAddress);
