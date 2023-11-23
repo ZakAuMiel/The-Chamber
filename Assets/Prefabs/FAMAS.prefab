@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6498300180958354115}
   - component: {fileID: 1862327062296064211}
   - component: {fileID: 6436205452201347869}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 436182258037032229}
   - component: {fileID: 1279504155533206919}
   - component: {fileID: 3932680668403507440}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 1484757478941773886}
   - component: {fileID: 8668110247845518118}
   - component: {fileID: 4332143525613750546}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: FamasStockLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 8262661376779758940}
   - component: {fileID: 4866212752787118377}
   - component: {fileID: 602548042785101425}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: MovingBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6521373193617887112}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: FAMAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5893878147579450674}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -0.042, y: 0.177, z: 0.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -373,7 +373,7 @@ Transform:
   - {fileID: 6498300180958354115}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6186749730873101323
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 7268542490930291289}
   - component: {fileID: 1006272278269970305}
   - component: {fileID: 9126243687889887045}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
