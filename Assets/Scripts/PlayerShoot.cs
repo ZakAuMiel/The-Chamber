@@ -26,7 +26,15 @@ public class PlayerShoot : NetworkBehaviour
             this.enabled = false;
         }
 
-        weaponGFX.layer = LayerMask.NameToLayer(weaponLayerName);
+        if(isLocalPlayer)
+        {
+            weaponGFX.layer = LayerMask.NameToLayer(weaponLayerName);
+        }
+        else
+        {
+            return;
+        }
+
     }
 
     private void Update()
