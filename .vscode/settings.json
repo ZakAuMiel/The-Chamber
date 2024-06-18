@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "The-Chamber.sln"
+    "dotnet.defaultSolution": "creer-un-fps-multijoueur-mirror-unity.sln"
 }

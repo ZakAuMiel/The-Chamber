@@ -1,6 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerSetup : NetworkBehaviour
 {
     [SerializeField]
@@ -9,11 +11,20 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     private string remoteLayerName = "RemotePlayer";
 
-    Camera sceneCamera;
+    [SerializeField]
+    private string dontDrawLayerName = "DontDraw";
+
+    [SerializeField]
+    private GameObject playerGraphics;
+
+    [SerializeField]
+    private GameObject playerNameplateGraphics;
 
     [SerializeField]
     private GameObject playerUIPrefab;
-    private GameObject playerUIInstance;
+
+    [HideInInspector]
+    public GameObject playerUIInstance;
 
     private void Start()
     {
@@ -24,37 +35,62 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
-            sceneCamera = Camera.main;
-            if(sceneCamera != null)
-            {
-                sceneCamera.gameObject.SetActive(false);
-            }
-            // Création du player UI
+            // Désactiver la partie graphique du joueur local
+            Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
+            Util.SetLayerRecursively(playerNameplateGraphics, LayerMask.NameToLayer(dontDrawLayerName));
+
+            // Création du UI du joueur local
             playerUIInstance = Instantiate(playerUIPrefab);
 
-        }
+            // Configuration du UI
+            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+            if(ui == null)
+            {
+                Debug.LogError("Pas de component PlayerUI sur playerUIInstance");
+            }
+            else
+            {
+                ui.SetPlayer(GetComponent<Player>());
+            }
 
-        GetComponent<Player>().Setup();
+            GetComponent<Player>().Setup();
+        }
+        
+    }
+
+    [Command]
+    void CmdSetUsername(string playerID, string username)
+    {
+        Player player = GameManager.GetPlayer(playerID);
+        if(player != null)
+        {
+            Debug.Log(username + " has joined !");
+            player.username = username;
+        }
     }
 
     public override void OnStartClient()
     {
         base.OnStartClient();
 
-        string netId = GetComponent<NetworkIdentity>().netId.ToString();
-        Player player = GetComponent<Player>();
-
-        GameManager.RegisterPlayer(netId, player);
+        RegisterPlayerAndSetUsername();
     }
 
+    // Utilisé dans le cas où le build est uniquement un serveur
     public override void OnStartServer()
     {
         base.OnStartServer();
-        
+
+        RegisterPlayerAndSetUsername();
+    }
+
+    private void RegisterPlayerAndSetUsername()
+    {
         string netId = GetComponent<NetworkIdentity>().netId.ToString();
         Player player = GetComponent<Player>();
 
         GameManager.RegisterPlayer(netId, player);
+        CmdSetUsername(transform.name, UserAccountManager.LoggedInUsername);
     }
 
     private void AssignRemoteLayer()
@@ -74,12 +110,12 @@ public class PlayerSetup : NetworkBehaviour
     private void OnDisable()
     {
         Destroy(playerUIInstance);
-        if(sceneCamera != null)
+
+        if(isLocalPlayer)
         {
-            sceneCamera.gameObject.SetActive(true);
+            GameManager.instance.SetSceneCameraActive(true);
         }
 
         GameManager.UnregisterPlayer(transform.name);
-
     }
 }
