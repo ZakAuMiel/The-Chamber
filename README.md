@@ -46,6 +46,6 @@ Pour toute question ou suggestion, vous pouvez me contacter à l'adresse email s
 
 ## Remerciements
 
-Je tiens à remercier <b> tutounityfr</b> pour son tutoriel exceptionnel pour débuter sur mirror networking et unity. le lien de son patreon est plus haut. :)
+Je tiens à remercier <b> tuto-unity-fr</b> pour son tutoriel exceptionnel pour débuter sur mirror networking et unity. le lien de son patreon est plus haut. :)
 
 **Bon jeu !**
