@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Le joueur avec l'ID '{playerId}' est déjà enregistré.");
+            Debug.LogWarning($"Le joueur avec l'ID '{playerId}' est déjà enregistré.");
         }
     }
 

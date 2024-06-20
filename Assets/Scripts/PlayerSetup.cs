@@ -44,7 +44,7 @@ public class PlayerSetup : NetworkBehaviour
 
             // Configuration du UI
             PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
-            if(ui == null)
+            if (ui == null)
             {
                 Debug.LogError("Pas de component PlayerUI sur playerUIInstance");
             }
@@ -54,15 +54,17 @@ public class PlayerSetup : NetworkBehaviour
             }
 
             GetComponent<Player>().Setup();
+
+            // Activer la caméra de la scène
+            GameManager.instance.SetSceneCameraActive(false);
         }
-        
     }
 
     [Command]
     void CmdSetUsername(string playerID, string username)
     {
         Player player = GameManager.GetPlayer(playerID);
-        if(player != null)
+        if (player != null)
         {
             Debug.Log(username + " has joined !");
             player.username = username;
@@ -87,10 +89,11 @@ public class PlayerSetup : NetworkBehaviour
     private void RegisterPlayerAndSetUsername()
     {
         string netId = GetComponent<NetworkIdentity>().netId.ToString();
+        string playerId = "Player" + netId;
         Player player = GetComponent<Player>();
 
-        GameManager.RegisterPlayer(netId, player);
-        CmdSetUsername(transform.name, UserAccountManager.LoggedInUsername);
+        GameManager.RegisterPlayer(playerId, player);
+        CmdSetUsername(playerId, UserAccountManager.LoggedInUsername);
     }
 
     private void AssignRemoteLayer()
@@ -111,11 +114,12 @@ public class PlayerSetup : NetworkBehaviour
     {
         Destroy(playerUIInstance);
 
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             GameManager.instance.SetSceneCameraActive(true);
         }
 
-        GameManager.UnregisterPlayer(transform.name);
+        string netId = GetComponent<NetworkIdentity>().netId.ToString();
+        GameManager.UnregisterPlayer("Player" + netId);
     }
 }
