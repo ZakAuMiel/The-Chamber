@@ -381,6 +381,28 @@ PrefabInstance:
       propertyPath: offsetY
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 6350640575916157135, guid: 22d7b8be8a4305f4990410248e49a694,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350640575916157135, guid: 22d7b8be8a4305f4990410248e49a694,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350640575916157135, guid: 22d7b8be8a4305f4990410248e49a694,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8771274655562078159, guid: 09afa1b1be5d4024096f758cc038f0fa,
+        type: 3}
+    - target: {fileID: 6350640575916157135, guid: 22d7b8be8a4305f4990410248e49a694,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8771274655562078159, guid: 09afa1b1be5d4024096f758cc038f0fa,
+        type: 3}
     - target: {fileID: 6350640575916157169, guid: 22d7b8be8a4305f4990410248e49a694,
         type: 3}
       propertyPath: m_Name
