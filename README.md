@@ -42,12 +42,10 @@ Les contributions sont les bienvenues ! Si vous avez des idées pour améliorer 
 
 ## Contact
 
-Pour toute question ou suggestion, vous pouvez me contacter à l'adresse email suivante : **votre-email@example.com**.
+Pour toute question ou suggestion, vous pouvez me contacter à l'adresse email suivante : zak.oubbea@hotmail.fr.
 
 ## Remerciements
 
-Je tiens à remercier ma famille et mes amis pour leur soutien continu. Un grand merci également à la communauté Unity pour ses ressources et tutoriels inestimables.
-
-Merci d'avoir pris le temps de lire ce README. J'espère que vous apprécierez jouer à ce jeu autant que j'ai apprécié le développer.
+Je tiens à remercier <b> tutounityfr</b> pour son tutoriel exceptionnel pour débuter sur mirror networking et unity. le lien de son patreon est plus haut. :)
 
 **Bon jeu !**
