@@ -139,6 +139,12 @@ public class Player : NetworkBehaviour
         {
             RpcTakeDamage(25, "Joueur");
         }
+
+        // Vérifie si le joueur tombe dans le vide
+        if (transform.position.y < -10f && !isDead)
+        {
+            RpcTakeDamage(currentHealth, "Void"); // Tue le joueur en lui infligeant des dégâts égaux à sa santé actuelle
+        }
     }
 
     [ClientRpc]

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             return;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void SetSceneCameraActive(bool isActive)
     {
-        if(sceneCamera == null)
+        if (sceneCamera == null)
         {
             return;
         }
@@ -42,18 +42,40 @@ public class GameManager : MonoBehaviour
     public static void RegisterPlayer(string netID, Player player)
     {
         string playerId = playerIdPrefix + netID;
-        players.Add(playerId, player);
-        player.transform.name = playerId;
+        if (!players.ContainsKey(playerId))
+        {
+            players.Add(playerId, player);
+            player.transform.name = playerId;
+        }
+        else
+        {
+            Debug.LogError($"Le joueur avec l'ID '{playerId}' est déjà enregistré.");
+        }
     }
 
     public static void UnregisterPlayer(string playerId)
     {
-        players.Remove(playerId);
+        if (players.ContainsKey(playerId))
+        {
+            players.Remove(playerId);
+        }
+        else
+        {
+            Debug.LogError($"Impossible de désenregistrer le joueur avec l'ID '{playerId}' car il n'existe pas.");
+        }
     }
 
     public static Player GetPlayer(string playerId)
     {
-        return players[playerId];
+        if (players.ContainsKey(playerId))
+        {
+            return players[playerId];
+        }
+        else
+        {
+            Debug.LogError($"L'ID du joueur '{playerId}' n'a pas été trouvé dans le dictionnaire.");
+            return null; // ou gérez l'erreur de manière appropriée
+        }
     }
 
     public static Player[] GetAllPlayers()

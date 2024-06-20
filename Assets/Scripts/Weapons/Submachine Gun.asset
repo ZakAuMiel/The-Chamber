@@ -18,7 +18,6 @@ MonoBehaviour:
   fireRate: 15
   magazineSize: 30
   reloadTime: 1.5
-  graphics: {fileID: 5893878147579450674, guid: 6be67ab9c4bb9da48b73e0e595037eed,
-    type: 3}
+  graphics: {fileID: 919132149155446097, guid: 9ccdf4f166a948543b3677ae7cc61985, type: 3}
   shootSound: {fileID: 8300000, guid: bda5d56f16a611c4a96596bf9c42c4de, type: 3}
   reloadSound: {fileID: 8300000, guid: de853522c82dd924387228f10252376f, type: 3}
