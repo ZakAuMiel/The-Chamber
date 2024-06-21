@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// Manages the setup and initialization of the player, including UI and network registration.
+/// </summary>
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerController))]
 public class PlayerSetup : NetworkBehaviour
@@ -25,6 +28,8 @@ public class PlayerSetup : NetworkBehaviour
 
     [HideInInspector]
     public GameObject playerUIInstance;
+
+    private string playerID;
 
     private void Start()
     {
@@ -60,6 +65,11 @@ public class PlayerSetup : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Command to set the username of the player on the server.
+    /// </summary>
+    /// <param name="playerID">The ID of the player.</param>
+    /// <param name="username">The username to set.</param>
     [Command]
     void CmdSetUsername(string playerID, string username)
     {
@@ -74,36 +84,46 @@ public class PlayerSetup : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-
         RegisterPlayerAndSetUsername();
     }
 
-    // Utilisé dans le cas où le build est uniquement un serveur
     public override void OnStartServer()
     {
         base.OnStartServer();
-
         RegisterPlayerAndSetUsername();
     }
 
+    /// <summary>
+    /// Registers the player and sets the username.
+    /// </summary>
     private void RegisterPlayerAndSetUsername()
     {
-        string netId = GetComponent<NetworkIdentity>().netId.ToString();
-        string playerId = "Player" + netId;
+        // Utilisation du compteur unique pour générer l'ID du joueur
         Player player = GetComponent<Player>();
+        GameManager.RegisterPlayer(player);
 
-        GameManager.RegisterPlayer(playerId, player);
-        CmdSetUsername(playerId, UserAccountManager.LoggedInUsername);
+        // Récupérer l'ID généré et l'affecter au joueur
+        playerID = player.transform.name;
+
+        if (isLocalPlayer)
+        {
+            CmdSetUsername(playerID, UserAccountManager.LoggedInUsername);
+        }
     }
 
+    /// <summary>
+    /// Assigns the remote layer to the player.
+    /// </summary>
     private void AssignRemoteLayer()
     {
         gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
     }
 
+    /// <summary>
+    /// Disables the components that should not be active for remote players.
+    /// </summary>
     private void DisableComponents()
     {
-        // On va boucler sur les différents composants renseignés et les désactiver si ce joueur n'est pas le notre
         for (int i = 0; i < componentsToDisable.Length; i++)
         {
             componentsToDisable[i].enabled = false;
@@ -119,7 +139,9 @@ public class PlayerSetup : NetworkBehaviour
             GameManager.instance.SetSceneCameraActive(true);
         }
 
-        string netId = GetComponent<NetworkIdentity>().netId.ToString();
-        GameManager.UnregisterPlayer("Player" + netId);
+        if (playerID != null)
+        {
+            GameManager.UnregisterPlayer(playerID);
+        }
     }
 }

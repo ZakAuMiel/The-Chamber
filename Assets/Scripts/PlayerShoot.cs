@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// Manages the shooting mechanics of the player, including firing bullets and handling hit effects.
+/// </summary>
 [RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
@@ -62,12 +65,22 @@ public class PlayerShoot : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Command to notify the server of a hit.
+    /// </summary>
+    /// <param name="pos">The position of the hit.</param>
+    /// <param name="normal">The normal vector at the hit point.</param>
     [Command]
     void CmdOnHit(Vector3 pos, Vector3 normal)
     {
         RpcDoHitEffect(pos, normal);
     }
 
+    /// <summary>
+    /// Client RPC to perform hit effects on all clients.
+    /// </summary>
+    /// <param name="pos">The position of the hit.</param>
+    /// <param name="normal">The normal vector at the hit point.</param>
     [ClientRpc]
     void RpcDoHitEffect(Vector3 pos, Vector3 normal)
     {
@@ -75,18 +88,26 @@ public class PlayerShoot : NetworkBehaviour
         Destroy(hitEffect, 2f);
     }
 
+    /// <summary>
+    /// Command to notify the server of a shot.
+    /// </summary>
+    /// <param name="targetPosition">The target position of the shot.</param>
     [Command]
     void CmdOnShoot(Vector3 targetPosition)
     {
         RpcDoShootEffect(targetPosition);
     }
 
+    /// <summary>
+    /// Client RPC to perform shooting effects on all clients.
+    /// </summary>
+    /// <param name="targetPosition">The target position of the shot.</param>
     [ClientRpc]
     void RpcDoShootEffect(Vector3 targetPosition)
     {
-        // Utilisez muzzlePoint pour positionner la balle correctement
-        Transform muzzlePoint = weaponManager.GetCurrentGraphics().bulletSpawn;
-        GameObject bullet = Instantiate(bulletPrefab, muzzlePoint.position, muzzlePoint.rotation);
+        // Utilisez bulletSpawn pour positionner la balle correctement
+        Transform bulletSpawn = weaponManager.GetCurrentGraphics().bulletSpawn;
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         BulletController bulletController = bullet.GetComponent<BulletController>();
         bulletController.Initialize(targetPosition);
 
@@ -96,6 +117,9 @@ public class PlayerShoot : NetworkBehaviour
         audioSource.PlayOneShot(currentWeapon.shootSound);
     }
 
+    /// <summary>
+    /// Handles the shooting mechanics on the client side.
+    /// </summary>
     [Client]
     private void Shoot()
     {
@@ -136,6 +160,12 @@ public class PlayerShoot : NetworkBehaviour
         CmdOnShoot(targetPosition);
     }
 
+    /// <summary>
+    /// Command to notify the server that a player has been shot.
+    /// </summary>
+    /// <param name="playerId">The ID of the player who was shot.</param>
+    /// <param name="damage">The amount of damage dealt.</param>
+    /// <param name="sourceID">The ID of the player who shot.</param>
     [Command]
     private void CmdPlayerShot(string playerId, float damage, string sourceID)
     {

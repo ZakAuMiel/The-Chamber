@@ -63,7 +63,7 @@ public class Player : NetworkBehaviour
         CmdBroadcastNewPlayerSetup();
     }
 
-    
+    [Command]
     private void CmdBroadcastNewPlayerSetup()
     {
         RpcSetupPlayerOnAllClients();
@@ -137,14 +137,20 @@ public class Player : NetworkBehaviour
 
         if(Input.GetKeyDown(KeyCode.K))
         {
-            RpcTakeDamage(25, "Joueur");
+            CmdTakeDamage(25, "Joueur");
         }
 
         // Vérifie si le joueur tombe dans le vide
         if (transform.position.y < -10f && !isDead)
         {
-            RpcTakeDamage(currentHealth, "Void"); // Tue le joueur en lui infligeant des dégâts égaux à sa santé actuelle
+            CmdTakeDamage(currentHealth, "Grosse chute :("); // Tue le joueur en lui infligeant des dégâts égaux à sa santé actuelle
         }
+    }
+
+    [Command]
+    public void CmdTakeDamage(float amount, string sourceID)
+    {
+        RpcTakeDamage(amount, sourceID);
     }
 
     [ClientRpc]
@@ -176,7 +182,7 @@ public class Player : NetworkBehaviour
         if(sourcePlayer != null)
         {
             sourcePlayer.kills++;
-            GameManager.instance.onPlayerKilledCallback.Invoke(username, sourcePlayer.username);
+            GameManager.instance.onPlayerKilledCallback?.Invoke(username, sourcePlayer.username);
         }
 
         deaths++;
