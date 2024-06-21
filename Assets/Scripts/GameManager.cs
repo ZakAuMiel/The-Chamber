@@ -2,11 +2,13 @@
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// Manages the registration and tracking of players within the game.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
-    private const string playerIdPrefix = "Player";
-
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    private static int playerCounter = 0;
 
     public MatchSettings matchSettings;
 
@@ -23,10 +25,12 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            return;
         }
-
-        Debug.LogError("Plus d'une instance de GameManager dans la scène");
+        else
+        {
+            Debug.LogError("Plus d'une instance de GameManager dans la scène");
+            Destroy(gameObject);
+        }
     }
 
     public void SetSceneCameraActive(bool isActive)
@@ -39,13 +43,16 @@ public class GameManager : MonoBehaviour
         sceneCamera.SetActive(isActive);
     }
 
-    public static void RegisterPlayer(string netID, Player player)
+    public static void RegisterPlayer(Player player)
     {
-        string playerId = playerIdPrefix + netID;
+        string playerId = "Player" + playerCounter;
+        playerCounter++;
+
         if (!players.ContainsKey(playerId))
         {
             players.Add(playerId, player);
             player.transform.name = playerId;
+            Debug.Log("Player registered: " + playerId);
         }
         else
         {
@@ -58,6 +65,7 @@ public class GameManager : MonoBehaviour
         if (players.ContainsKey(playerId))
         {
             players.Remove(playerId);
+            Debug.Log("Player unregistered: " + playerId);
         }
         else
         {
@@ -69,12 +77,13 @@ public class GameManager : MonoBehaviour
     {
         if (players.ContainsKey(playerId))
         {
+            Debug.Log("Player found: " + playerId);
             return players[playerId];
         }
         else
         {
             Debug.LogError($"L'ID du joueur '{playerId}' n'a pas été trouvé dans le dictionnaire.");
-            return null; // ou gérez l'erreur de manière appropriée
+            return null;
         }
     }
 

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Mirror;
 
+/// <summary>
+/// Manages the setup and initialization of the player, including UI and network registration.
+/// </summary>
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(PlayerController))]
 public class PlayerSetup : NetworkBehaviour
@@ -26,6 +29,8 @@ public class PlayerSetup : NetworkBehaviour
     [HideInInspector]
     public GameObject playerUIInstance;
 
+    private string playerID;
+
     private void Start()
     {
         if (!isLocalPlayer)
@@ -44,7 +49,7 @@ public class PlayerSetup : NetworkBehaviour
 
             // Configuration du UI
             PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
-            if(ui == null)
+            if (ui == null)
             {
                 Debug.LogError("Pas de component PlayerUI sur playerUIInstance");
             }
@@ -54,15 +59,17 @@ public class PlayerSetup : NetworkBehaviour
             }
 
             GetComponent<Player>().Setup();
+
+            // Activer la caméra de la scène
+            GameManager.instance.SetSceneCameraActive(false);
         }
-        
     }
 
     [Command]
     void CmdSetUsername(string playerID, string username)
     {
         Player player = GameManager.GetPlayer(playerID);
-        if(player != null)
+        if (player != null)
         {
             Debug.Log(username + " has joined !");
             player.username = username;
@@ -72,25 +79,26 @@ public class PlayerSetup : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-
         RegisterPlayerAndSetUsername();
     }
 
-    // Utilisé dans le cas où le build est uniquement un serveur
     public override void OnStartServer()
     {
         base.OnStartServer();
-
-        RegisterPlayerAndSetUsername();
     }
 
     private void RegisterPlayerAndSetUsername()
     {
-        string netId = GetComponent<NetworkIdentity>().netId.ToString();
         Player player = GetComponent<Player>();
+        GameManager.RegisterPlayer(player);
 
-        GameManager.RegisterPlayer(netId, player);
-        CmdSetUsername(transform.name, UserAccountManager.LoggedInUsername);
+        // Récupérer l'ID généré et l'affecter au joueur
+        playerID = player.transform.name;
+
+        if (isLocalPlayer)
+        {
+            CmdSetUsername(playerID, UserAccountManager.LoggedInUsername);
+        }
     }
 
     private void AssignRemoteLayer()
@@ -100,7 +108,6 @@ public class PlayerSetup : NetworkBehaviour
 
     private void DisableComponents()
     {
-        // On va boucler sur les différents composants renseignés et les désactiver si ce joueur n'est pas le notre
         for (int i = 0; i < componentsToDisable.Length; i++)
         {
             componentsToDisable[i].enabled = false;
@@ -111,11 +118,14 @@ public class PlayerSetup : NetworkBehaviour
     {
         Destroy(playerUIInstance);
 
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             GameManager.instance.SetSceneCameraActive(true);
         }
 
-        GameManager.UnregisterPlayer(transform.name);
+        if (playerID != null)
+        {
+            GameManager.UnregisterPlayer(playerID);
+        }
     }
 }

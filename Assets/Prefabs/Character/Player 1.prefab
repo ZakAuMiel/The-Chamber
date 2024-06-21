@@ -614,13 +614,13 @@ GameObject:
   - component: {fileID: 8771274655562078154}
   - component: {fileID: 8771274655562078155}
   - component: {fileID: 8771274655562078152}
-  - component: {fileID: 5365487985370230390}
-  - component: {fileID: -6835903869025803494}
-  - component: {fileID: -2978287317279742530}
-  - component: {fileID: -9094892234975123393}
   - component: {fileID: -6302732286472748789}
-  - component: {fileID: 2979324204515314261}
+  - component: {fileID: -6835903869025803494}
+  - component: {fileID: -9094892234975123393}
   - component: {fileID: 1649690712}
+  - component: {fileID: 5365487985370230390}
+  - component: {fileID: -2978287317279742530}
+  - component: {fileID: 2979324204515314261}
   - component: {fileID: -906904186153050082}
   - component: {fileID: 6953750071084893036}
   - component: {fileID: 8060676148610035974}
@@ -716,7 +716,7 @@ MonoBehaviour:
   jointSpring: 20
   jointMaxForce: 50
   canMove: 1
---- !u!114 &5365487985370230390
+--- !u!114 &-6302732286472748789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,14 +725,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8771274655562078159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ddec1aac28502646be56feda64f9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 72026495
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  maxHealth: 100
+  username: Player
+  kills: 0
+  deaths: 0
+  disableOnDeath:
+  - {fileID: -9094892234975123393}
+  - {fileID: 8771274655562078152}
+  disableGameObjectsOnDeath:
+  - {fileID: 8771274655974948988}
+  - {fileID: 8771274655489620707}
+  - {fileID: 7072542646479740498}
+  deathEffect: {fileID: 7257156907877402975, guid: 853cb0de6cf7dc24196eeb69fb5e20ec,
+    type: 3}
+  spawnEffect: {fileID: 1683028100954756874, guid: d19afe198bd546846847c2e5444c510e,
+    type: 3}
+  hitSound: {fileID: 8300000, guid: 7086b709adaf9284ba1cd572ea2c7651, type: 3}
+  destroySound: {fileID: 8300000, guid: b4030e33eb8598140b8c4530b6def78b, type: 3}
 --- !u!114 &-6835903869025803494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +777,64 @@ MonoBehaviour:
   playerUIPrefab: {fileID: 3873858722955928585, guid: 37b63ff20a7d20842823014150df229d,
     type: 3}
   playerUIInstance: {fileID: 0}
+--- !u!114 &-9094892234975123393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771274655562078159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6639e5cb0ffef745b76338f2dc5bf8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  cam: {fileID: 8771274655489620732}
+  mask:
+    serializedVersion: 2
+    m_Bits: 567
+  bulletPrefab: {fileID: 1383616907660598, guid: b44e9cfadf993934f85d04da2321eb4c,
+    type: 3}
+--- !u!114 &1649690712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771274655562078159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c8792e9425d9a4cb70ba2002c99933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  primaryWeapon: {fileID: 11400000, guid: 27e4605b912d6884eacf232438e236f5, type: 2}
+  weaponHolder: {fileID: 664983527696001329}
+  weaponLayerName: Weapon
+  currentMagazineSize: 0
+  isReloading: 0
+--- !u!114 &5365487985370230390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771274655562078159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 72026495
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!153 &-2978287317279742530
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -864,57 +937,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &-9094892234975123393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8771274655562078159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6639e5cb0ffef745b76338f2dc5bf8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0.1
-  cam: {fileID: 8771274655489620732}
-  mask:
-    serializedVersion: 2
-    m_Bits: 567
---- !u!114 &-6302732286472748789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8771274655562078159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddec1aac28502646be56feda64f9f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0.1
-  maxHealth: 100
-  username: Player
-  kills: 0
-  deaths: 0
-  disableOnDeath:
-  - {fileID: -9094892234975123393}
-  - {fileID: 8771274655562078152}
-  disableGameObjectsOnDeath:
-  - {fileID: 8771274655974948988}
-  - {fileID: 8771274655489620707}
-  - {fileID: 7072542646479740498}
-  deathEffect: {fileID: 7257156907877402975, guid: 853cb0de6cf7dc24196eeb69fb5e20ec,
-    type: 3}
-  spawnEffect: {fileID: 1683028100954756874, guid: d19afe198bd546846847c2e5444c510e,
-    type: 3}
-  hitSound: {fileID: 8300000, guid: 7086b709adaf9284ba1cd572ea2c7651, type: 3}
-  destroySound: {fileID: 8300000, guid: b4030e33eb8598140b8c4530b6def78b, type: 3}
 --- !u!95 &2979324204515314261
 Animator:
   serializedVersion: 5
@@ -936,26 +958,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1649690712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8771274655562078159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7c8792e9425d9a4cb70ba2002c99933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0.1
-  primaryWeapon: {fileID: 11400000, guid: 27e4605b912d6884eacf232438e236f5, type: 2}
-  weaponHolder: {fileID: 664983527696001329}
-  weaponLayerName: Weapon
-  currentMagazineSize: 0
-  isReloading: 0
 --- !u!82 &-906904186153050082
 AudioSource:
   m_ObjectHideFlags: 0

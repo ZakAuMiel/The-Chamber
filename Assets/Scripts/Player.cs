@@ -53,7 +53,7 @@ public class Player : NetworkBehaviour
 
     public void Setup()
     {
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             // Changement de caméra
             GameManager.instance.SetSceneCameraActive(false);
@@ -63,7 +63,7 @@ public class Player : NetworkBehaviour
         CmdBroadcastNewPlayerSetup();
     }
 
-    
+    [Command]
     private void CmdBroadcastNewPlayerSetup()
     {
         RpcSetupPlayerOnAllClients();
@@ -72,7 +72,7 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
     {
-        if(firstSetup)
+        if (firstSetup)
         {
             wasEnabledOnStart = new bool[disableOnDeath.Length];
             for (int i = 0; i < disableOnDeath.Length; i++)
@@ -105,7 +105,7 @@ public class Player : NetworkBehaviour
 
         // Ré-active le collider du joueur
         Collider col = GetComponent<Collider>();
-        if(col != null)
+        if (col != null)
         {
             col.enabled = true;
         }
@@ -118,7 +118,7 @@ public class Player : NetworkBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTimer);
-        
+
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
@@ -130,27 +130,33 @@ public class Player : NetworkBehaviour
 
     private void Update()
     {
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
         {
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            RpcTakeDamage(25, "Joueur");
+            CmdTakeDamage(25, transform.name); // Le joueur s'inflige des dégâts à lui-même
         }
 
         // Vérifie si le joueur tombe dans le vide
         if (transform.position.y < -10f && !isDead)
         {
-            RpcTakeDamage(currentHealth, "Void"); // Tue le joueur en lui infligeant des dégâts égaux à sa santé actuelle
+            CmdTakeDamage(currentHealth, transform.name); // Le joueur se tue en tombant dans le vide
         }
+    }
+
+    [Command]
+    public void CmdTakeDamage(float amount, string sourceID)
+    {
+        RpcTakeDamage(amount, sourceID);
     }
 
     [ClientRpc]
     public void RpcTakeDamage(float amount, string sourceID)
     {
-        if(isDead)
+        if (isDead)
         {
             return;
         }
@@ -161,7 +167,7 @@ public class Player : NetworkBehaviour
         currentHealth -= amount;
         Debug.Log(transform.name + " a maintenant : " + currentHealth + " points de vies.");
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             audioSource.PlayOneShot(destroySound);
             Die(sourceID);
@@ -173,10 +179,10 @@ public class Player : NetworkBehaviour
         isDead = true;
 
         Player sourcePlayer = GameManager.GetPlayer(sourceID);
-        if(sourcePlayer != null)
+        if (sourcePlayer != null && sourcePlayer != this)
         {
             sourcePlayer.kills++;
-            GameManager.instance.onPlayerKilledCallback.Invoke(username, sourcePlayer.username);
+            GameManager.instance.onPlayerKilledCallback?.Invoke(username, sourcePlayer.username);
         }
 
         deaths++;
@@ -205,7 +211,7 @@ public class Player : NetworkBehaviour
         Destroy(_gfxIns, 3f);
 
         // Changement de caméra
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             GameManager.instance.SetSceneCameraActive(true);
             GetComponent<PlayerSetup>().playerUIInstance.SetActive(false);
