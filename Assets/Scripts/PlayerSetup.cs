@@ -65,11 +65,6 @@ public class PlayerSetup : NetworkBehaviour
         }
     }
 
-    /// <summary>
-    /// Command to set the username of the player on the server.
-    /// </summary>
-    /// <param name="playerID">The ID of the player.</param>
-    /// <param name="username">The username to set.</param>
     [Command]
     void CmdSetUsername(string playerID, string username)
     {
@@ -90,15 +85,10 @@ public class PlayerSetup : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        RegisterPlayerAndSetUsername();
     }
 
-    /// <summary>
-    /// Registers the player and sets the username.
-    /// </summary>
     private void RegisterPlayerAndSetUsername()
     {
-        // Utilisation du compteur unique pour générer l'ID du joueur
         Player player = GetComponent<Player>();
         GameManager.RegisterPlayer(player);
 
@@ -111,17 +101,11 @@ public class PlayerSetup : NetworkBehaviour
         }
     }
 
-    /// <summary>
-    /// Assigns the remote layer to the player.
-    /// </summary>
     private void AssignRemoteLayer()
     {
         gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
     }
 
-    /// <summary>
-    /// Disables the components that should not be active for remote players.
-    /// </summary>
     private void DisableComponents()
     {
         for (int i = 0; i < componentsToDisable.Length; i++)

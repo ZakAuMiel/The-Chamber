@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Manages the registration and tracking of players within the game.
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-        else if (instance != this)
+        else
         {
             Debug.LogError("Plus d'une instance de GameManager dans la scène");
             Destroy(gameObject);
@@ -47,11 +47,17 @@ public class GameManager : MonoBehaviour
     {
         string playerId = "Player" + playerCounter;
         playerCounter++;
-        
-        players.Add(playerId, player);
-        player.transform.name = playerId;
 
-        Debug.Log("Player registered: " + playerId);
+        if (!players.ContainsKey(playerId))
+        {
+            players.Add(playerId, player);
+            player.transform.name = playerId;
+            Debug.Log("Player registered: " + playerId);
+        }
+        else
+        {
+            Debug.LogError($"Le joueur avec l'ID '{playerId}' est déjà enregistré.");
+        }
     }
 
     public static void UnregisterPlayer(string playerId)
