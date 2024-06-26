@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Mirror;
+using System.Collections;
 
 public class PickUpWeapon : NetworkBehaviour
 {
@@ -27,43 +26,29 @@ public class PickUpWeapon : NetworkBehaviour
             return;
         }
 
-        pickUpGraphics = Instantiate(theWeapon.graphics, transform);
-        pickUpGraphics.transform.position = transform.position;
-        canPickUp = true;
-    }
-
-    [ServerCallback]
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && canPickUp)
-        {
-            WeaponManager weaponManager = other.GetComponent<WeaponManager>();
-            if (weaponManager != null)
-            {
-                EquipNewWeapon(weaponManager);
-            }
-        }
-    }
-
-    [Server]
-    void EquipNewWeapon(WeaponManager weaponManager)
-    {
-        // Détruit l'arme actuelle du joueur
-        if (weaponManager.GetCurrentGraphics() != null)
-        {
-            Destroy(weaponManager.GetCurrentGraphics().gameObject);
-        }
-
-        // Equipe la nouvelle arme
-        weaponManager.EquipWeapon(theWeapon);
-
-        canPickUp = false;
         if (pickUpGraphics != null)
         {
             Destroy(pickUpGraphics);
         }
 
-        StartCoroutine(DelayResetWeapon());
+        pickUpGraphics = Instantiate(theWeapon.graphics, transform);
+        pickUpGraphics.transform.position = transform.position;
+        canPickUp = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && canPickUp)
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null && player.isLocalPlayer)
+            {
+                player.CmdPickUpWeapon(theWeapon.weaponID);
+                canPickUp = false;
+                Destroy(pickUpGraphics);
+                StartCoroutine(DelayResetWeapon());
+            }
+        }
     }
 
     IEnumerator DelayResetWeapon()

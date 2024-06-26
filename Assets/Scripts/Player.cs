@@ -221,4 +221,21 @@ public class Player : NetworkBehaviour
 
         StartCoroutine(Respawn());
     }
+
+    // Ajoutez ces méthodes pour la gestion des armes
+    [Command]
+    public void CmdPickUpWeapon(string weaponID)
+    {
+        RpcEquipWeapon(weaponID);
+    }
+
+    [ClientRpc]
+    public void RpcEquipWeapon(string weaponID)
+    {
+        WeaponManager weaponManager = GetComponent<WeaponManager>();
+        if (weaponManager != null)
+        {
+            weaponManager.EquipWeapon(weaponID);
+        }
+    }
 }
