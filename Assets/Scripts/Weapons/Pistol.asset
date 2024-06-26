@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pistol
   damage: 50
-  range: 10
+  range: 120
   fireRate: 0
   magazineSize: 26
   reloadTime: 2.5
