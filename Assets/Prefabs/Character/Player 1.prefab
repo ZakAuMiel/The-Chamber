@@ -322,6 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664983527696001329}
+  - component: {fileID: 7156428683180907}
   m_Layer: 8
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -344,6 +345,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8771274655489620706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7156428683180907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488545454083208856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 664983527696001329}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  sendIntervalMultiplier: 1
+  timelineOffset: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  bufferResetMultiplier: 3
+  changedDetection: 1
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!1 &6580272995003560826
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,11 +849,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  primaryWeapon: {fileID: 11400000, guid: 27e4605b912d6884eacf232438e236f5, type: 2}
+  primaryWeaponID: 0
   weaponHolder: {fileID: 664983527696001329}
   weaponLayerName: Weapon
   currentMagazineSize: 0
   isReloading: 0
+  weaponDataArray:
+  - {fileID: 11400000, guid: 27e4605b912d6884eacf232438e236f5, type: 2}
+  - {fileID: 11400000, guid: b8f1c6c685b921e45ab9ea8ac4449f53, type: 2}
 --- !u!114 &5365487985370230390
 MonoBehaviour:
   m_ObjectHideFlags: 0
