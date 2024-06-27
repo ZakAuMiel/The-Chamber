@@ -15,10 +15,10 @@ MonoBehaviour:
   weaponID: 1
   name: Submachine Gun
   damage: 8
-  range: 200
+  range: 100
   fireRate: 15
   magazineSize: 30
-  reloadTime: 1.5
+  reloadTime: 2
   graphics: {fileID: 1671029925390012, guid: 119551172e2002344983c075ab97ef79, type: 3}
-  shootSound: {fileID: 8300000, guid: bda5d56f16a611c4a96596bf9c42c4de, type: 3}
+  shootSound: {fileID: 8300000, guid: ac1182b25b3fc8147aaf88f19e4241ba, type: 3}
   reloadSound: {fileID: 8300000, guid: de853522c82dd924387228f10252376f, type: 3}

@@ -230,6 +230,74 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: USERNAME
+--- !u!1 &2172595184898294063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4880662791861728908}
+  - component: {fileID: 7183351960761913068}
+  - component: {fileID: 194395467599999337}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4880662791861728908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172595184898294063}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8771274655562078153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7183351960761913068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172595184898294063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &194395467599999337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172595184898294063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!1 &5486217378799014219
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +753,7 @@ Transform:
   - {fileID: 8771274655974948991}
   - {fileID: 8771274655489620706}
   - {fileID: 4697061011049432864}
+  - {fileID: 4880662791861728908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8771274655562078154
@@ -778,12 +847,12 @@ MonoBehaviour:
   - {fileID: 8771274655974948988}
   - {fileID: 8771274655489620707}
   - {fileID: 7072542646479740498}
-  deathEffect: {fileID: 7257156907877402975, guid: 853cb0de6cf7dc24196eeb69fb5e20ec,
+  deathEffect: {fileID: 1146961906002798, guid: 04f6f308bd2d35947a3a6b2a626d1980,
     type: 3}
-  spawnEffect: {fileID: 1683028100954756874, guid: d19afe198bd546846847c2e5444c510e,
+  spawnEffect: {fileID: 1791930136598424, guid: f1a1c60952b571c4fa485b0139d4a6b7,
     type: 3}
-  hitSound: {fileID: 8300000, guid: 7086b709adaf9284ba1cd572ea2c7651, type: 3}
-  destroySound: {fileID: 8300000, guid: b4030e33eb8598140b8c4530b6def78b, type: 3}
+  hitSound: {fileID: 8300000, guid: 35f264dfeaa2aee4ba01fe86af7a4558, type: 3}
+  destroySound: {fileID: 8300000, guid: 6bb466c11198e154986037631b2f22c6, type: 3}
 --- !u!114 &-6835903869025803494
 MonoBehaviour:
   m_ObjectHideFlags: 0
