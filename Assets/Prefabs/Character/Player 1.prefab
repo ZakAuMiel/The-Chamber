@@ -857,6 +857,7 @@ MonoBehaviour:
   weaponDataArray:
   - {fileID: 11400000, guid: 27e4605b912d6884eacf232438e236f5, type: 2}
   - {fileID: 11400000, guid: b8f1c6c685b921e45ab9ea8ac4449f53, type: 2}
+  - {fileID: 11400000, guid: feea43ae24a97fe48b9b6689c70f6570, type: 2}
 --- !u!114 &5365487985370230390
 MonoBehaviour:
   m_ObjectHideFlags: 0
