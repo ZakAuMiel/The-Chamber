@@ -767,8 +767,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  theWeapon: {fileID: 11400000, guid: 27e4605b912d6884eacf232438e236f5, type: 2}
-  respawnDelay: 5
+  theWeapon: {fileID: 11400000, guid: b8f1c6c685b921e45ab9ea8ac4449f53, type: 2}
+  respawnDelay: 10
 --- !u!65 &8183017073819581365
 BoxCollider:
   m_ObjectHideFlags: 0
