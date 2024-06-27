@@ -57,16 +57,6 @@ namespace SlimUI.ModernMenu{
 		
 
 		public void  Start (){
-			// check difficulty
-			if(PlayerPrefs.GetInt("NormalDifficulty") == 1){
-				difficultynormaltextLINE.gameObject.SetActive(true);
-				difficultyhardcoretextLINE.gameObject.SetActive(false);
-			}
-			else
-			{
-				difficultyhardcoretextLINE.gameObject.SetActive(true);
-				difficultynormaltextLINE.gameObject.SetActive(false);
-			}
 
 			// check slider values
 			musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
@@ -82,21 +72,6 @@ namespace SlimUI.ModernMenu{
 				fullscreentext.GetComponent<TMP_Text>().text = "off";
 			}
 
-			// check hud value
-			if(PlayerPrefs.GetInt("ShowHUD")==0){
-				showhudtext.GetComponent<TMP_Text>().text = "off";
-			}
-			else{
-				showhudtext.GetComponent<TMP_Text>().text = "on";
-			}
-
-			// check tool tip value
-			if(PlayerPrefs.GetInt("ToolTips")==0){
-				tooltipstext.GetComponent<TMP_Text>().text = "off";
-			}
-			else{
-				tooltipstext.GetComponent<TMP_Text>().text = "on";
-			}
 
 			// check shadow distance/enabled
 			if(platform == Platform.Desktop){
