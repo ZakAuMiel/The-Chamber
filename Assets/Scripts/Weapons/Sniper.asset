@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Sniper
   damage: 100
   range: 300
-  fireRate: 3.5
+  fireRate: 0.1
   magazineSize: 10
   reloadTime: 2
   graphics: {fileID: 1481417426184300, guid: 0460a539b95c36d43a61b9c176cdca57, type: 3}
