@@ -208,7 +208,7 @@ public class Player : NetworkBehaviour
 
         // Apparition du système de particules de mort
         GameObject _gfxIns = Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(_gfxIns, 3f);
+        Destroy(_gfxIns, 1.5f);
 
         // Changement de caméra
         if (isLocalPlayer)
