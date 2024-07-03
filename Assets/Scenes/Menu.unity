@@ -567,6 +567,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d7b8be8a4305f4990410248e49a694, type: 3}
+--- !u!114 &1366624351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6350640575916157135, guid: 22d7b8be8a4305f4990410248e49a694,
+    type: 3}
+  m_PrefabInstance: {fileID: 1366624350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1616866012 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8248968534781480470, guid: 9b211d0886e709e429f8054e1a9ad0af,
@@ -31395,7 +31407,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1366624351}
         m_TargetAssemblyTypeName: Mirror.NetworkManager, Mirror
         m_MethodName: StartHost
         m_Mode: 1
@@ -34016,7 +34028,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1366624351}
         m_TargetAssemblyTypeName: Mirror.NetworkManager, Mirror
         m_MethodName: StartClient
         m_Mode: 1
